@@ -1,0 +1,12 @@
+{
+    "name": "alibi/cms",
+    "autoload": {
+        "psr-4": {
+            "app\\": "./"
+        }
+    },
+    "require": {
+        "vlucas/phpdotenv": "^5.3",
+        "phpmailer/phpmailer": "^6.5"
+    }
+}
