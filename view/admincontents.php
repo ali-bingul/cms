@@ -109,13 +109,14 @@ $where = " WHERE active = 1";
             }
         }
         if (e.target.id === "delete") {
-            let title = $(this).closest("div").find("a[id='title']").html();
-            if (confirm(`Do you want to delete content which title : ${title}`)) {
-                $.get('contents', {
-                    'title': title,
-                    'deleteClicked': true
-                });
-                window.location.reload();
+            let id = $(this).closest("div").find("a[id='contentId']").html();
+            if (confirm(`Do you want to delete content which id : ${id}`)) {
+                // $.get('contents', {
+                //     'title': title,
+                //     'deleteClicked': true
+                // });
+                // window.location.reload();
+                window.location.href = `/cms/admin/contents?id=${id}&deleteClicked=${true}`;
             }
         }
         if (e.target.id === "edit") {
@@ -144,7 +145,8 @@ $where = " WHERE active = 1";
 if (isset($_GET['id']) && isset($_GET['isActive'])) {
     $contentController->updateActive(['id' => $_GET['id']], $_GET['isActive']);
     header('Location: /cms/admin/contents');
-} elseif (isset($_GET['title']) && $_GET['deleteClicked']) {
-    $contentController->deleteContent(['title' => $_GET['title']]);
+} elseif (isset($_GET['id']) && $_GET['deleteClicked']) {
+    $contentController->deleteContent(['id' => $_GET['id']]);
+    header('Location: /cms/admin/contents');
 }
 ?>
