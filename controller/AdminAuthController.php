@@ -30,6 +30,5 @@ class AdminAuthController extends Controller
     {
         Application::$app->logoutAdmin();
         $response->redirect('/cms/admin/login');
-        // session_destroy();
     }
 }

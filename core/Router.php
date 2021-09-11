@@ -28,7 +28,6 @@ class Router{
             return Application::$app->view->renderView('404');
         }
         if(is_string($callback)){
-            // return $this->renderView($callback);
             return Application::$app->view->renderView($callback);
         }
         if(is_array($callback)){
@@ -39,45 +38,9 @@ class Router{
             foreach($controller->getMiddlewares() as $middleware){
                 $middleware->execute();
             }
-            // Application::$app->controller = new $callback[0]();
-            // Application::$app->controller->action = $callback[1];
-            // $callback[0] = Application::$app->controller;
         }
         return call_user_func($callback, $this->request, $this->response);
     }
-
-    // public function renderView($view, $params = []){
-        // foreach($params as $key => $value){
-        //     $$key = $value;
-        // }
-        // $layoutContent = $this->layoutContent();
-        // $viewContent = $this->renderOnlyView($view, $params);
-        // return str_replace('{{content}}', $viewContent, $layoutContent);
-        // include_once Application::$ROOT_DIR . "/view/$view.php";
-
-        // return Application::$app->view->renderView($view, $params);
-    // }
-
-    // protected function layoutContent(){
-        // $layout = Application::$app->layout;
-        // if(Application::$app->controller){
-        //     $layout = Application::$app->controller->layout;
-        // }
-        // ob_start();
-        // include_once Application::$ROOT_DIR . "/view/layouts/$layout.php";
-        // return ob_get_clean();
-
-    //     return Application::$app->view->layoutContent();
-    // }
-
-    // protected function renderOnlyView($view, $params = []){
-    //     foreach($params as $key => $value){
-    //         $$key = $value;
-    //     }
-    //     ob_start();
-    //     include_once Application::$ROOT_DIR . "/view/$view.php";
-    //     return ob_get_clean();
-    // }
 }
 
 ?>

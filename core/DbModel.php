@@ -121,45 +121,4 @@ abstract class DbModel extends Model{
                 }
             }
         }
-
-        public function uploadComment($class, $where){
-            // $tableName = $class::tableName();
-            // $attributes = array_keys($where);
-            // $sqlw = implode("AND ", array_map(fn($attr) => "$attr = :$attr", $attributes));
-            // if(isset($_POST['submit'])){
-            //     $sql = sprintf("UPDATE $tableName SET member_id = %s, post_title = %s WHERE $sqlw",
-            //     $_SESSION['member'],
-            //     substr($_SERVER['REQUEST_URI'], 5)
-            //     );
-            //     $statement = self::prepare($sql);
-            //     foreach($where as $key => $value){
-            //         $statement->bindValue(":$key", $value);
-            //     }
-            //     $insert = $statement->execute();
-            //     return true;
-            // }
-
-
-
-            // $tableName = $class::tableName();
-            // $attributes = $this->attributes();
-            // $params = array_map(fn($attr) => ":$attr", $attributes);
-            // $statement = self::prepare("INSERT INTO $tableName (".implode(',', $attributes).") 
-            //                             VALUES (".implode(',', $params).")");
-
-            // $attributes[] = 'member_id';
-            // $attributes[] = 'post_title';
-            // $attr = implode(',', $attributes);
-            // $values = implode(',', $params);
-            // $statement = self::prepare(sprintf('INSERT INTO %s %s,member_id,post_title  VALUES %s,%s,%s', $tableName, $attr, $values, $_SESSION['member'], substr($_SERVER['REQUEST_URI'], 5)));
-
-            // foreach($attributes as $attribute){
-            //     $statement->bindValue(":$attribute", $this->{$attribute});
-            // }
-
-            // $statement->execute();
-            // return true;
-        }
-
-        
     }
