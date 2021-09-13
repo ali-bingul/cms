@@ -174,7 +174,7 @@ $memberController = new MemberController();
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
+                        <a class="logo" href="/cms/admin">
                             <img src="<?php echo PUBLIC_PATH ?>/images/icon/logo-white.png" alt="CoolAdmin" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
@@ -190,34 +190,34 @@ $memberController = new MemberController();
                     <ul class="navbar-mobile__list list-unstyled">
                         <li>
                             <a href="/cms/admin">
-                                <i class="fas fa-shopping-basket"></i>
+                                <i class="fas fa-home"></i>
                                 <span class="bot-line"></span>Dashboard</a>
                         </li>
                         <li>
                             <a href="/cms/admin/contents">
-                                <i class="fas fa-trophy"></i>
+                                <i class="fas fa-list"></i>
                                 <span class="bot-line"></span>Contents</a>
                         </li>
                         <li>
                             <a href="/cms/admin/comments">
-                                <i class="fas fa-trophy"></i>
+                                <i class="fas fa-comment"></i>
                                 <span class="bot-line"></span>Comments</a>
                         </li>
                         <li>
                             <a href="/cms/admin/members">
-                                <i class="fas fa-trophy"></i>
+                                <i class="fas fa-user"></i>
                                 <span class="bot-line"></span>Members</a>
                         </li>
                         <li>
                             <a href="/cms/admin/account">
-                                <i class="fas fa-trophy"></i>
+                                <i class="fas fa-thumbs-up"></i>
                                 <span class="bot-line"></span>Account</a>
                         </li>
                     </ul>
                 </div>
             </nav>
         </header>
-        <div class="sub-header-mobile-2 d-block d-lg-none">
+        <div class="sub-header-mobile-2 d-block d-lg-none" style="background: #FCA311;">
             <div class="header__tool">
                 <div class="account-wrap">
                     <div class="account-item account-item--style2 clearfix js-item-menu">
@@ -232,7 +232,7 @@ $memberController = new MemberController();
                                 </div>
                             </div>
                             <div class="account-dropdown__footer">
-                                <a href="/cms/admin/login">
+                                <a href="/cms/admin/logout">
                                     <i class="zmdi zmdi-power"></i>Logout</a>
                             </div>
                         </div>

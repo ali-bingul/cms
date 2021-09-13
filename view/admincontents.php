@@ -54,8 +54,8 @@ $where = " WHERE active = 1";
                         <div class="card">
                             <img class="card-img-top" src="<?php echo PUBLIC_PATH ?>/uploads/<?php echo $value['image'] ?>" alt="Card image cap">
                             <div class="card-body">
-                                <h4 class="card-title mb-3"><a href="" style="text-decoration: none; color: black;" id="contentId"><?php echo $value['id'] ?></a></h4>
-                                <h4 class="card-title mb-3"><a href="" style="text-decoration: none; color: black;" id="title">Title : <?php echo $value['title'] ?></a></h4>
+                                <h4 class="card-title mb-3"><a href="/cms/<?php echo Application::slugify($value['title'])?>" target="_blank" style="text-decoration: none; color: black;" id="contentId"><?php echo $value['id'] ?></a></h4>
+                                <h4 class="card-title mb-3"><a href="/cms/<?php echo Application::slugify($value['title'])?>" target="_blank" style="text-decoration: none; color: black;" id="title">Title : <?php echo $value['title'] ?></a></h4>
                                 <label class="switch switch-3d switch-primary mr-3">
                                     <input type="checkbox" id="switch" class="switch-input" <?php if ($value['active'] == true) {
                                                                                                 echo "checked";

@@ -30,7 +30,7 @@ $orderBy = " ORDER BY id DESC";
 </div> -->
 <?php if (Application::$app->session->getFlash('success')) : ?>
     <div class="alert alert-success" role="alert">
-        <h4 class="alert-heading">Uploaded!</h4>
+        <h4 class="alert-heading">Sended!</h4>
         <p><?php echo Application::$app->session->getFlash('success') ?></p>
     </div>
 <?php endif; ?>
