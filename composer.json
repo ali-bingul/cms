@@ -1,12 +1,17 @@
 {
-    "name": "alibi/cms",
+    "name": "asus/cms2",
     "autoload": {
         "psr-4": {
+            "controller\\": "./",
+            "middleware\\": "./",
             "app\\": "./"
         }
     },
+
     "require": {
         "vlucas/phpdotenv": "^5.3",
+        "bramus/router": "~1.6",
+        "league/plates": "^3.4",
         "phpmailer/phpmailer": "^6.5"
     }
 }

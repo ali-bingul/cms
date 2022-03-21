@@ -1,37 +1,44 @@
 <?php
+
 namespace app\core;
+
 use app\core\Application;
 use app\core\middlewares\BaseMiddleware;
+use League\Plates\Engine;
 
-class Controller {
+class Controller
+{
+    /**
+     * @var \app\core\middlewares\BaseMiddleware[]
+     */
+    protected array $middlewares = [];
 
-    // default layout
-    public string $layout = 'main';
+    public string $layout = "main"; //default layout
     public string $action = '';
 
-    /** 
-     * @var \app\core\middlewares\BaseMiddleware[]
-    */
-    protected array $middlewares = [];
-    
-    // render view from router function
-    public function render($view, $params=[]){
-        // return Application::$app->router->renderView($view, $params);
-        return Application::$app->view->renderView($view, $params);
+    public $templates;
+    public function __construct()
+    {
+        $this->templates = new Engine(__DIR__ . '/../templates');
     }
 
-    // set layout of content
-    public function setLayout($layout){
+    public function setLayout($layout)
+    {
         $this->layout = $layout;
     }
 
-    public function registerMiddleware(BaseMiddleware $middleware){
+    public function render($view, $params = [])
+    {
+        return Application::$app->view->renderView($view, $params);
+    }
+    
+    public function registerMiddleware(BaseMiddleware $middleware)
+    {
         $this->middlewares[] = $middleware;
     }
 
-    public function getMiddlewares(): array{
+    public function getMiddleware(): array
+    {
         return $this->middlewares;
     }
 }
-
-?>

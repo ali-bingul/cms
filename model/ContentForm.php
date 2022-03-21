@@ -11,6 +11,7 @@ class ContentForm extends DbModel{
     public string $image = '';
     public string $slug = '';
     public string $category = '';
+    public string $category_id = '';
 
     public function rules(): array {
         return [
@@ -35,7 +36,7 @@ class ContentForm extends DbModel{
 
     public function attributes(): array {
         return [
-            'title', 'content', 'category'
+            'title', 'content', 'category', 'category_id'
         ];
     }
 

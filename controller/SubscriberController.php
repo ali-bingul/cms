@@ -10,30 +10,21 @@ use app\model\Subscriber;
 
 class SubscriberController extends Controller
 {
-    public function getSubscribers($orderBy = '', $limit = '')
+    public function addSubscriber()
     {
-        $subscriber = new Subscriber();
-        return $subscriber->getAll(Subscriber::class, '',   $orderBy, $limit);
-    }
-
-    public function addSubscriber(Request $request, Response $response)
-    {
+        $request = new Request();
+        $response = new Response();
         $subscriber = new Subscriber();
         if ($request->isPost()) {
             $subscriber->loadData($request->getBody());
             if ($subscriber->validate() && $subscriber->save()) {
                 Application::$app->session->setFlash('success', "Thanks for subscribe me!");
-                return $response->redirect('/cms/');
+                return $response->redirect('/');
             }
             $this->setLayout('main');
-            return $this->render('/cms/', [
+            return $this->render('/', [
                 'model' => $subscriber
             ]);
         }
-    }
-
-    public function deleteSubscriber($where){
-        $subscriber = new Subscriber();
-        $subscriber::deleteOne($where, Subscriber::class);
     }
 }

@@ -8,7 +8,7 @@ class Comment extends DbModel{
 
     public int $member_id = 0;
     public string $content = '';
-    public string $post_title = '';
+    public string $post_id = '';
 
     public static function tableName(): string {
         return 'comment';
@@ -16,7 +16,7 @@ class Comment extends DbModel{
 
     public function attributes(): array {
         return [
-            'member_id', 'content', 'post_title'
+            'member_id', 'content', 'post_id'
         ];
     }
 

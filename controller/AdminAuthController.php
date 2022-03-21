@@ -10,25 +10,28 @@ use app\core\Application;
 
 class AdminAuthController extends Controller
 {
-    public function adminlogin(Request $request, Response $response)
+    public function adminlogin()
     {
-        $this->setLayout('auth');
+        $request = new Request();
+        $response = new Response();
         $admin = new AdminLoginForm();
         if ($request->isPost()) {
             $admin->loadData($request->getBody());
             if ($admin->validate() && $admin->login()) {
-                $response->redirect('/cms/admin');
+                $response->redirect('/admin');
                 return;
             }
         }
-        return $this->render('adminlogin', [
-            'model' => $admin
-        ]);
+        $params = [
+            "model" => $admin,
+        ];
+        echo $this->templates->render("adminlogin", $params);
     }
 
-    public function adminLogout(Request $request, Response $response)
+    public function adminLogout()
     {
+        $response = new Response();
         Application::$app->logoutAdmin();
-        $response->redirect('/cms/admin/login');
+        $response->redirect('/login/admin');
     }
 }

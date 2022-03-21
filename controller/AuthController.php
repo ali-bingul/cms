@@ -7,12 +7,12 @@ use app\core\Request;
 use app\core\Response;
 use app\model\Member;
 use app\model\LoginForm;
-use app\core\middlewares\HomeMiddleware;
 
 class AuthController extends Controller{
 
-    public function login(Request $request, Response $response){
-        $this->setLayout('auth');
+    public function login(){
+        $request = new Request();
+        $response = new Response();
         $loginForm = new LoginForm();
         if($request->isPost()){
             $loginForm->loadData($request->getBody());
@@ -21,51 +21,57 @@ class AuthController extends Controller{
                 return;
             }
         }
-        return $this->render('login', [
-            'model' => $loginForm
-        ]);
+        $params = [
+            "model" => $loginForm,
+        ];
+        echo $this->templates->render("login", $params);
     }
 
 
-    public function register(Request $request){
+    public function register(){
+        $request = new Request();
+        $response = new Response();
         $this->setLayout('auth');
         $member = new Member();
         if($request->isPost()){
             $member->loadData($request->getBody());
             if($member->validate() && $member->save()){
                 Application::$app->session->setFlash('success', "Thanks for registering");
-                Application::$app->response->redirect('/cms/login');
+                Application::$app->response->redirect('/login');
                 exit;
             }
-            return $this->render('register', [
-                "model" => $member
-            ]);
+            $params = [
+                "model" => $member,
+            ];
+            echo $this->templates->render("register", $params);
         }
-        return $this->render('register', [
-            "model" => $member
-        ]);
+        $params = [
+            "model" => $member,
+        ];
+        echo $this->templates->render("register", $params);
     }
 
-    public function logout(Request $request, Response $response){
+    public function logout(){
+        $response = new Response();
         Application::$app->logoutMember();
-        $response->redirect('/cms/');
+        $response->redirect('/');
     }
 
-    public function updateAccount(Request $request){
+    public function updateAccount(){
+        $request = new Request();
         $member = new Member();
         if($request->isPost()){
             $member->loadData($request->getBody());
             if($member->validate() && $member->update(['id' => $_SESSION['member']])){
                 Application::$app->session->setFlash('success', "Your account has been successfully updated");
-                Application::$app->response->redirect('/cms/account');
+                Application::$app->response->redirect('/account');
                 exit;
             }
-            return $this->render('account', [
-                'model' => $member
-            ]);
+            $params = [
+                "model" => $member,
+            ];
+            echo $this->templates->render("account", $params);
         }
     }
-
-    
 }
 ?>

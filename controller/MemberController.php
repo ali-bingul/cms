@@ -5,30 +5,18 @@ use app\core\Application;
 use app\core\Controller;
 use app\core\Request;
 use app\core\Response;
-use app\model\Member;
 use app\model\UpdateAccount;
+use app\services\MailService;
+use app\services\MemberService;
 
 class MemberController extends Controller{
 
-    public function getMembers($orderBy = '', $limit = ''){
-        $member = new Member();
-        return $member::getAll(Member::class, '',  $orderBy, $limit);
-    }
-
-    public function deleteMember($where){
-        $member = new Member();
-        $member->deleteOne($where, Member::class);
-    }
-
-    public function getMember($where){
-        $member = new Member();
-        return $member::findOne($where, Member::class);
-    }
-
-    public function updateMember(Request $request, Response $response){
+    public function updateMember(){
+        $request = new Request();
+        $response = new Response();
         $updateAccount = new UpdateAccount();
-        $memberController = new MemberController();
-        $currentMember = $memberController->getMember(['id' => $_SESSION['member']]);
+        $memberService = new MemberService();
+        $currentMember = $memberService->getMember(['id' => $_SESSION['member']]);
         if($request->isPost()){
             $updateAccount->loadData($request->getBody());
             $oldpassword = $request->getBody()['oldpassword'];
@@ -37,25 +25,29 @@ class MemberController extends Controller{
                 $updateAccount->email = $currentMember->email;
                 if($updateAccount->validate() && $updateAccount->update(" WHERE id = " . $_SESSION['member'])){
                     Application::$app->session->setFlash('success', "You successfully updated your account!");
-                    Application::$app->response->redirect('/cms/account');
+                    Application::$app->response->redirect('/account');
                     exit;
                 }
-                return $this->render('account', [
-                    'model' => $updateAccount
-                ]);
+                $params = [
+                    "model" => $updateAccount,
+                ];
+                echo $this->templates->render("acount", $params);
             }
-            return $this->render('account', [
-                'model' => $updateAccount
-            ]);
+            $params = [
+                "model" => $updateAccount,
+            ];
+            echo $this->templates->render("acount", $params);
         }
     }
-
-    public function sendEmailToMember(Request $request, Response $response){
+    
+    public function sendEmailToMember(){
+        $request = new Request();
+        $response = new Response();
         $body = $request->getBody();
-        $mailController = new MailController();
-        $memberController = new MemberController();
-        $member = $memberController->getMember(['id' => $body['id']]);
-        $result = $mailController->sentMailToMember($member, $body['subject'], $body['body']);
+        $mailService = new MailService();
+        $memberService = new MemberService();
+        $member = $memberService->getMember(['id' => $body['id']]);
+        $result = $mailService->sentMailToMember($member, $body['subject'], $body['body']);
         if($result == true){
             $msg = "Mail successfully sended to member";  
         }
@@ -63,6 +55,6 @@ class MemberController extends Controller{
             $msg = "Mail can not be sended to member" . $result;
         }
         Application::$app->session->setFlash('success', $msg);
-        return $response->redirect('/cms/admin/members');
+        return $response->redirect('/admin/members');
     }
 }

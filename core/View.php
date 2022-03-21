@@ -1,7 +1,7 @@
 <?php
 namespace app\core;
 
-class View{
+class View {
     public string $title = 'Philosophy';
 
     public function renderView($view, $params = []){
@@ -20,7 +20,7 @@ class View{
             $layout = Application::$app->controller->layout;
         }
         ob_start();
-        include_once Application::$ROOT_DIR . "/view/layouts/$layout.php";
+        include_once Application::$ROOT_DIR . "/templates/layouts/$layout.php";
         return ob_get_clean();
     }
 
@@ -29,7 +29,7 @@ class View{
             $$key = $value;
         }
         ob_start();
-        include_once Application::$ROOT_DIR . "/view/$view.php";
+        include_once Application::$ROOT_DIR . "/templates/$view.php";
         return ob_get_clean();
     }
 }

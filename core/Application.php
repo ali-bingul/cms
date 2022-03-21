@@ -30,9 +30,7 @@ class Application {
         $this->session = new Session();
         $this->router = new Router($this->request, $this->response);
         $this->view = new View();
-
         $this->db = new Database($config['db']);
-
         $primaryValueMember = $this->session->get('member');
         $primaryValueAdmin = $this->session->get('admin');
         if($primaryValueMember){
@@ -56,9 +54,6 @@ class Application {
             echo $this->router->resolve();
         }catch(Exception $e){
             $this->response->setStatusCode($e->getCode());
-            // echo $this->router->renderView('error', [
-            //     'exception' => $e
-            // ]);
             echo $this->view->renderView('error', [
                 'exception' => $e
             ]);
